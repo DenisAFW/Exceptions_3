@@ -16,26 +16,31 @@ import custom_exceptions.WrongPasswdException;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws WrongLoginException, WrongPasswdException {
+    public static void main(String[] args) throws WrongPasswdException, WrongLoginException {
+        input();
+    }
 
+    private static void input()throws WrongLoginException, WrongPasswdException{
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите логин, который ");
         System.out.println("содержит только буквы, числа и");
         System.out.printf("нижнее подчеркивание: ");
         String login = sc.next();
+
         checkLogin(login);
 
         System.out.printf("Придумайте папроль, с такими же правилами символов как у логина : ");
         String passwd = sc.next();
 
-        checkPasswd(passwd);
+        checkLogin(login);
 
         System.out.printf("Подтвердите пароль: ");
         String confirmPasswd = sc.next();
-
-        checkConfPasswd(passwd, confirmPasswd);
-        System.out.println("Регистрация прошла успешно!");
         sc.close();
+
+        confirmPasswd(passwd, confirmPasswd);
+
+        System.out.println("Регистрация прошла успешно!");
     }
 
     private static void checkLogin(String login) throws WrongLoginException {
@@ -50,7 +55,7 @@ public class Main {
         }
     }
 
-    private static void checkConfPasswd(String passwd, String confirmPasswd) throws WrongPasswdException {
+    private static void confirmPasswd(String passwd, String confirmPasswd) throws WrongPasswdException {
         if (!passwd.equals(confirmPasswd)) {
             throw new WrongPasswdException("Пароли не совпадают!");
         }
