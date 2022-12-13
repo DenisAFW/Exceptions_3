@@ -20,7 +20,7 @@ public class Main {
         input();
     }
 
-    private static void input()throws WrongLoginException, WrongPasswdException{
+    private static void input() throws WrongLoginException, WrongPasswdException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите логин, который ");
         System.out.println("содержит только буквы, числа и");
@@ -44,13 +44,19 @@ public class Main {
     }
 
     private static void checkLogin(String login) throws WrongLoginException {
-        if (!login.matches("(\\w+\\d+)|(\\d+\\w+)") | login.length() > 21) {
+        if (login.length() > 21) {
+            throw new WrongLoginException("Превышен лимит символов(20).");
+        }
+        if (!login.matches("(\\w+\\d+)|(\\d+\\w+)")) {
             throw new WrongLoginException("Неверное содержание логина или превышен лимит символов(20).");
         }
     }
 
     private static void checkPasswd(String passwd) throws WrongPasswdException {
-        if (!passwd.matches("(\\w+\\d+)|(\\d+\\w+)") | passwd.length() > 21) {
+        if (passwd.length() > 21) {
+            throw new WrongPasswdException("Превышен лимит символов(20).");
+        }
+        if (!passwd.matches("(\\w+\\d+)|(\\d+\\w+)")) {
             throw new WrongPasswdException("Неверное содержание пароля или превышен лимит символов(20)");
         }
     }
